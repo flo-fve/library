@@ -1,0 +1,5 @@
+titre;auteur;année;disponible
+Les Fleurs du Mal;Baudelaire;1857;vrai
+Les Misérables;Victor Hugo;1862;vrai
+Les Contemplations;Victor Hugo;2856;faux
+La Maison Vide;Laurent Mauvignier;2025;vrai
