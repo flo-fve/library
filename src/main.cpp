@@ -13,7 +13,7 @@ using namespace std;
 
 int main(int argc, const char *argv[]) {
     // Bibliotheque
-    Bibliotheque biblio;
+    Bibliotheque biblio("data/livres.txt");
 
     // Affichage du menu
     afficherMenu();

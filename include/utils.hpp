@@ -7,4 +7,6 @@
 
 void afficherMenu();
 
+std::vector<std::string> diviserChaine(const std::string& s, const std::string& delimiter);
+
 #endif

@@ -16,6 +16,7 @@ typedef std::map<std::string, std::vector<Livre>> Collection;
 class Bibliotheque {
     public:
         Bibliotheque();
+        Bibliotheque(std::string baseDeDonnees);
         ~Bibliotheque();
 
         void afficher() const;

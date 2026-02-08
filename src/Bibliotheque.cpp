@@ -1,14 +1,56 @@
 #include <algorithm>
+#include <fstream>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <vector>
 
 #include "Bibliotheque.hpp"
+#include "Livre.hpp"
+#include "utils.hpp"
 
 /******************************************************************************************
  * Constructor and destructor
  ******************************************************************************************/
 
 Bibliotheque::Bibliotheque() {}
+
+Bibliotheque::Bibliotheque(std::string BaseDeDonnees) {
+    std::ifstream flux(BaseDeDonnees.c_str());
+
+    if (flux) {
+        std::string ligne;
+
+        std::string titre = "";
+        std::string auteur = "";
+        int annee = 0;
+        bool disponible = true;
+        Livre livre;
+        
+        while (getline(flux, ligne)) {
+            try {
+                std::vector<std::string> res = diviserChaine(ligne, ";");
+
+                titre = res[0];
+                auteur = res[1];
+                annee = std::stoi(res[2]);
+                disponible = res[3] == "vrai";
+                
+                livre = Livre(titre, auteur, annee, disponible);
+                
+                collection[auteur].push_back(livre);
+                
+            } catch (std::exception const& e) {
+                std::cerr << "La bibliothèque n'a pas pu être chargée (erreur lecture : " << e.what() << ")" << std::endl; 
+                
+                break;
+            }
+        }
+    } else {
+        std::cerr << "La bibliothèque n'a pas pu être chargée (erreur fichier)" << std::endl;
+
+    }
+}
 
 Bibliotheque::~Bibliotheque() {}
 
@@ -21,7 +63,7 @@ void Bibliotheque::afficher() const {
         std::cout << "Il n'y a aucun livre dans la bibliothèque" << std::endl;
 
     } else {
-        std::map<std::string, std::vector<Livre>>::const_iterator it;
+        Collection::const_iterator it;
 
         for (const auto& [auteur, vecteur] : collection) {
             std::cout << "+ " << auteur << " :" << std::endl;
