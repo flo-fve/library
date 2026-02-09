@@ -19,6 +19,16 @@
 bin/
 obj/
 
+# --- Environnement virtuel Python ---
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
 # --- Fichiers générés par les IDE ---
 # Visual Studio
 .vs/
