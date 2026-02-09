@@ -21,6 +21,7 @@ class Livre {
 
         std::string getAuteur() const;
         std::string getTitre() const;
+        int getAnnee() const;
         bool getDisponibilite() const;
 
         void setDisponibilite(bool dispo);

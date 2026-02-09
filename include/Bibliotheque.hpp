@@ -30,6 +30,7 @@ class Bibliotheque {
 
     private:
         Collection collection;
+        std::string sauvegarde;
 };
 
 #endif  // INCLUDE_BIBLIOTHEQUE_HPP_

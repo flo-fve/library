@@ -18,8 +18,10 @@
 
 Bibliotheque::Bibliotheque() {}
 
-Bibliotheque::Bibliotheque(std::string const& BaseDeDonnees) {
-    std::ifstream flux(BaseDeDonnees.c_str());
+Bibliotheque::Bibliotheque(std::string const& baseDeDonnees) {
+    std::ifstream flux(baseDeDonnees.c_str());
+
+    sauvegarde = baseDeDonnees;
 
     if (flux) {
         std::string ligne;
@@ -37,7 +39,7 @@ Bibliotheque::Bibliotheque(std::string const& BaseDeDonnees) {
                 titre = res[0];
                 auteur = res[1];
                 annee = std::stoi(res[2]);
-                disponible = res[3] == "vrai";
+                disponible = res[3] == "1";
 
                 livre = Livre(titre, auteur, annee, disponible);
 
@@ -55,7 +57,22 @@ Bibliotheque::Bibliotheque(std::string const& BaseDeDonnees) {
     }
 }
 
-Bibliotheque::~Bibliotheque() {}
+Bibliotheque::~Bibliotheque() {
+    std::ofstream flux(sauvegarde.c_str());
+
+    if (flux) {
+        for (auto const& it : collection) {
+            auto const& livres = it.second;
+
+            for (auto const& livre : livres) {
+                flux << livre.getTitre() << ";" << livre.getAuteur() << ";" << livre.getAnnee()
+                     << ";" << livre.getDisponibilite() << "\n";
+            }
+        }
+    } else {
+        std::cerr << "La bibliothèque n'a pas pu être sauvegardée (erreur fichier)\n";
+    }
+}
 
 /******************************************************************************************
  * Methods

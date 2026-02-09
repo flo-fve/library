@@ -35,6 +35,10 @@ std::string Livre::getTitre() const {
     return titre;
 }
 
+int Livre::getAnnee() const {
+    return annee;
+}
+
 bool Livre::getDisponibilite() const {
     return disponible;
 }

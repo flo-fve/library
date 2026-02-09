@@ -1,4 +1,5 @@
-Les Fleurs du Mal;Baudelaire;1857;vrai
-Les Misérables;Victor Hugo;1862;vrai
-Les Contemplations;Victor Hugo;2856;faux
-La Maison Vide;Laurent Mauvignier;2025;vrai
+Les Fleurs du Mal;Baudelaire;1857;1
+Salut c'est cool;Flo Favre;2026;0
+La Maison Vide;Laurent Mauvignier;2025;1
+Les Misérables;Victor Hugo;1862;1
+Les Contemplations;Victor Hugo;2856;1
