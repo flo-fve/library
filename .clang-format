@@ -6,7 +6,8 @@ IndentWidth: 4
 ColumnLimit: 100
 TabWidth: 4
 UseTab: Never
-AccessModifierOffset: -3
+AccessModifierOffset: 0
+IndentAccessModifiers: true
 
 # Gestion des accolades (Style 'Attach' pour un code compact)
 BreakBeforeBraces: Attach
