@@ -16,6 +16,6 @@ repos:
     rev: v1.3.5
     hooks:
       - id: clang-tidy
-        args: ["-p=build"] # Nécessite un fichier compile_commands.json
+        args: ["-p=build"]
       - id: cppcheck
       - id: cpplint
