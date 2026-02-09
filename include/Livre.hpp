@@ -1,5 +1,7 @@
-#ifndef LIVRE_HPP
-#define LIVRE_HPP
+// Copyright 2026 Florian Favre
+
+#ifndef INCLUDE_LIVRE_HPP_
+#define INCLUDE_LIVRE_HPP_
 
 #include <string>
 #include <vector>
@@ -11,12 +13,12 @@
 class Livre {
     public:
         Livre();
-        Livre(std::string titre, std::string auteur, int annee);
-        Livre(std::string titre, std::string auteur, int annee, bool disponible);
+        Livre(std::string const& titre, std::string const& auteur, int annee);
+        Livre(std::string const& titre, std::string const& auteur, int annee, bool disponible);
         ~Livre();
 
         void afficher() const;
-        
+
         std::string getAuteur() const;
         std::string getTitre() const;
         bool getDisponibilite() const;
@@ -36,4 +38,4 @@ class Livre {
 
 std::ostream& operator<<(std::ostream& os, const Livre& livre);
 
-#endif
+#endif  // INCLUDE_LIVRE_HPP_

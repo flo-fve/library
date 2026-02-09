@@ -1,6 +1,8 @@
-#include <iostream>
+// Copyright 2026 Florian Favre
 
 #include "Livre.hpp"
+
+#include <iostream>
 
 /******************************************************************************************
  * Constructor and destructor
@@ -8,9 +10,11 @@
 
 Livre::Livre() : titre("Titre"), auteur("Auteur"), annee(2026), disponible(1) {}
 
-Livre::Livre(std::string titre, std::string auteur, int annee) : titre(titre), auteur(auteur), annee(annee), disponible(1) {}
+Livre::Livre(std::string const& titre, std::string const& auteur, int annee)
+    : titre(titre), auteur(auteur), annee(annee), disponible(1) {}
 
-Livre::Livre(std::string titre, std::string auteur, int annee, bool disponible) : titre(titre), auteur(auteur), annee(annee), disponible(disponible) {}
+Livre::Livre(std::string const& titre, std::string const& auteur, int annee, bool disponible)
+    : titre(titre), auteur(auteur), annee(annee), disponible(disponible) {}
 
 Livre::~Livre() {}
 
