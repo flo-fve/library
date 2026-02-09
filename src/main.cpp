@@ -24,7 +24,7 @@ int main(int argc, const char* argv[]) {
     int action = 0;
 
     while (action != 6) {
-        cout << endl << "Choisir l'action : ";
+        cout << "\nChoisir l'action : ";
         cin >> action;
         cin.ignore();
 
@@ -53,9 +53,9 @@ int main(int argc, const char* argv[]) {
             int typeRecherche = 0;
 
             while (typeRecherche != 1 && typeRecherche != 2) {
-                cout << "  1. Rechercher par titre" << endl;
-                cout << "  2. Rechercher par auteur" << endl;
-                cout << "  3. Revenir au menu" << endl;
+                cout << "  1. Rechercher par titre\n";
+                cout << "  2. Rechercher par auteur\n";
+                cout << "  3. Revenir au menu\n";
 
                 cin >> typeRecherche;
                 cin.ignore();
@@ -73,7 +73,7 @@ int main(int argc, const char* argv[]) {
                             livre->afficher();
                         }
                     } else {
-                        cout << "Titre non trouvé" << endl;
+                        cout << "Titre non trouvé\n";
                     }
 
                 } else if (typeRecherche == 2) {  // Recherche par auteur
@@ -90,14 +90,14 @@ int main(int argc, const char* argv[]) {
                             livre.afficher();
                         }
                     } catch (string const& erreur) {
-                        cerr << erreur << endl;
+                        cerr << erreur << "\n";
                     }
 
                 } else if (typeRecherche == 3) {  // Revenir au menu
                     break;
 
                 } else {
-                    cout << "Choix non reconnu" << endl;
+                    cout << "Choix non reconnu\n";
                 }
             }
 
@@ -115,9 +115,9 @@ int main(int argc, const char* argv[]) {
             getline(cin, auteurEmprunt);
 
             if (biblio.emprunterLivre(auteurEmprunt, titreEmprunt)) {
-                cout << "Livre '" << titreEmprunt << "' emprunté" << endl;
+                cout << "Livre '" << titreEmprunt << "' emprunté\n";
             } else {
-                cout << "Livre non trouvé" << endl;
+                cout << "Livre non trouvé\n";
             }
 
         } else if (action == 5) {  // Retourner un livre
@@ -131,16 +131,16 @@ int main(int argc, const char* argv[]) {
             getline(cin, auteurRetourne);
 
             if (biblio.retournerLivre(auteurRetourne, titreRetourne)) {
-                cout << "Livre '" << titreRetourne << "' retourné" << endl;
+                cout << "Livre '" << titreRetourne << "' retourné\n";
             } else {
-                cout << "Livre non trouvé" << endl;
+                cout << "Livre non trouvé\n";
             }
 
         } else if (action == 6) {  // Quitter
-            exit(0);
+            return 0;
 
         } else {
-            cout << "Choix non reconnu" << endl;
+            cout << "Choix non reconnu\n";
         }
     }
 

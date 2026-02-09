@@ -11,12 +11,12 @@
  ******************************************************************************************/
 
 void afficherMenu() {
-    std::cout << "1. Ajouter un livre" << std::endl;
-    std::cout << "2. Rechercher un livre" << std::endl;
-    std::cout << "3. Afficher les livres" << std::endl;
-    std::cout << "4. Emprunter un livre" << std::endl;
-    std::cout << "5. Retourner un livre" << std::endl;
-    std::cout << "6. Quitter" << std::endl;
+    std::cout << "1. Ajouter un livre\n";
+    std::cout << "2. Rechercher un livre\n";
+    std::cout << "3. Afficher les livres\n";
+    std::cout << "4. Emprunter un livre\n";
+    std::cout << "5. Retourner un livre\n";
+    std::cout << "6. Quitter\n";
 }
 
 std::vector<std::string> diviserChaine(const std::string& s, const std::string& delimiter) {

@@ -45,13 +45,13 @@ Bibliotheque::Bibliotheque(std::string const& BaseDeDonnees) {
 
             } catch (std::exception const& e) {
                 std::cerr << "La bibliothèque n'a pas pu être chargée (erreur lecture : "
-                          << e.what() << ")" << std::endl;
+                          << e.what() << ")\n";
 
                 break;
             }
         }
     } else {
-        std::cerr << "La bibliothèque n'a pas pu être chargée (erreur fichier)" << std::endl;
+        std::cerr << "La bibliothèque n'a pas pu être chargée (erreur fichier)\n";
     }
 }
 
@@ -63,14 +63,14 @@ Bibliotheque::~Bibliotheque() {}
 
 void Bibliotheque::afficher() const {
     if (!collection.size()) {
-        std::cout << "Il n'y a aucun livre dans la bibliothèque" << std::endl;
+        std::cout << "Il n'y a aucun livre dans la bibliothèque\n";
 
     } else {
         for (const auto& it : collection) {
             const auto& auteur = it.first;
             const auto& livres = it.second;
 
-            std::cout << "+ " << auteur << " :" << std::endl;
+            std::cout << "+ " << auteur << " :\n";
             for (const auto& element : livres) {
                 std::cout << "| " << element;
             }
