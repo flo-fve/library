@@ -18,6 +18,7 @@
 [Rr]elease/
 bin/
 obj/
+compile_commands.json
 
 # --- Environnement virtuel Python ---
 .env
