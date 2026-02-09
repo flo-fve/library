@@ -4,9 +4,10 @@ project(Bibliotheque VERSION 1.0 LANGUAGES CXX)
 # Indispensable pour tes hooks (clang-tidy, etc.)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# On définit le standard C++ (ex: C++17)
-set(CMAKE_CXX_STANDARD 17)
+# On définit le standard C++
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # On cherche tous les fichiers sources dans le dossier src/
 file(GLOB SOURCES "src/*.cpp")

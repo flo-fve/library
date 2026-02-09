@@ -6,6 +6,7 @@ IndentWidth: 4
 ColumnLimit: 100
 TabWidth: 4
 UseTab: Never
+AccessModifierOffset: -3
 
 # Gestion des accolades (Style 'Attach' pour un code compact)
 BreakBeforeBraces: Attach
@@ -18,7 +19,7 @@ SpaceAfterCStyleCast: true
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 
-# Tri automatique des #include (très pratique pour éviter les doublons)
+# Tri automatique des #include
 SortIncludes: true
 IncludeBlocks: Regroup
 
