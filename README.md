@@ -1,8 +1,8 @@
-# Gestionnaire de bibliothèque
+# Library manager
 
-Ce projet d'entraînement a pour but de développer une bibliothèque de livres permettant à l'utilisateur de :
-- visualiser les livres présents
-- recherche un livre par titre ou auteur
-- emprunter ou retourner un livre
+The aim of this training project is to develop a library of books allowing users to:
+- view the books available
+- search for a book by title or author
+- borrow or return a book
 
-Un livre est défini par son titre, son auteur, sa date de parution, et sa disponibilité à l'emprunt.
+A book is defined by its title, author, publication date, and availability for borrowing.

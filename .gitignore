@@ -1,18 +1,18 @@
-# --- Binaires et Objets ---
+# --- Binairies and objects ---
 *.o
 *.obj
 *.exe
 *.out
 *.app
 
-# --- Bibliothèques statiques et dynamiques ---
+# --- Static and dynamic libraries ---
 *.a
 *.lib
 *.so
 *.dll
 *.dylib
 
-# --- Dossiers de compilation (Build) ---
+# --- Compilation folder (Build) ---
 [Bb]uild/
 [Dd]ebug/
 [Rr]elease/
@@ -20,7 +20,7 @@ bin/
 obj/
 compile_commands.json
 
-# --- Environnement virtuel Python ---
+# --- Python virtual environment ---
 .env
 .envrc
 .venv
@@ -30,7 +30,7 @@ ENV/
 env.bak/
 venv.bak/
 
-# --- Fichiers générés par les IDE ---
+# --- IDE generated files ---
 # Visual Studio
 .vs/
 *.sln
@@ -49,7 +49,7 @@ cmake-build-release/
 !.vscode/tasks.json
 !.vscode/launch.json
 
-# --- Divers ---
+# --- Miscellaneous ---
 *.log
 .DS_Store (Mac)
 Thumbs.db (Windows)

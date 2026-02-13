@@ -1,7 +1,5 @@
-# Basé sur le style Google
 BasedOnStyle: Google
 
-# Taille de l'indentation (4 espaces est le standard de fait en C++)
 IndentWidth: 4
 ColumnLimit: 100
 TabWidth: 4
@@ -9,23 +7,17 @@ UseTab: Never
 AccessModifierOffset: 0
 IndentAccessModifiers: true
 
-# Gestion des accolades (Style 'Attach' pour un code compact)
 BreakBeforeBraces: Attach
 
-# Modern C++ : alignement des pointeurs et références à gauche
 PointerAlignment: Left
 
-# Espaces et esthétique
 SpaceAfterCStyleCast: true
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 
-# Tri automatique des #include
 SortIncludes: true
 IncludeBlocks: Regroup
 
-# Permettre de mettre des petites fonctions sur une seule ligne
 AllowShortFunctionsOnASingleLine: Inline
 
-# Aligner les paramètres lors d'un saut de ligne
 AlignAfterOpenBracket: Align
