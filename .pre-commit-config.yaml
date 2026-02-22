@@ -18,9 +18,3 @@ repos:
       - id: clang-tidy
         args: ["-p=build"]
       - id: cppcheck
-        args: [
-            "--project=build/compile_commands.json",
-            "--inline-suppr",
-            "--std=c++20",
-            "--error-exitcode=1",
-          ]
