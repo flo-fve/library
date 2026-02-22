@@ -10,8 +10,8 @@
  * Definition of the functions
  ******************************************************************************************/
 
-void afficherMenu();
+void displayMenu();
 
-std::vector<std::string> diviserChaine(const std::string& s, const std::string& delimiter);
+std::vector<std::string> splitString(const std::string& s, const std::string& delimiter);
 
 #endif  // INCLUDE_UTILS_HPP_

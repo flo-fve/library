@@ -1,6 +1,6 @@
 // Copyright 2026 Florian Favre
 
-#include "Bibliotheque.hpp"
+#include "Library.hpp"
 
 #include <algorithm>
 #include <fstream>
@@ -9,41 +9,41 @@
 #include <string>
 #include <vector>
 
-#include "Livre.hpp"
+#include "Book.hpp"
 #include "utils.hpp"
 
 /******************************************************************************************
  * Constructor and destructor
  ******************************************************************************************/
 
-Bibliotheque::Bibliotheque() {}
+Library::Library() {}
 
-Bibliotheque::Bibliotheque(std::string const& baseDeDonnees) {
-    std::ifstream flux(baseDeDonnees.c_str());
+Library::Library(std::string const& data) {
+    std::ifstream flux(data.c_str());
 
-    sauvegarde = baseDeDonnees;
+    save = data;
 
     if (flux) {
-        std::string ligne;
+        std::string line;
 
         std::string titre = "";
-        std::string auteur = "";
-        int annee = 0;
-        bool disponible = true;
-        Livre livre;
+        std::string author = "";
+        int year = 0;
+        bool available = true;
+        Book book;
 
-        while (getline(flux, ligne)) {
+        while (getline(flux, line)) {
             try {
-                std::vector<std::string> res = diviserChaine(ligne, ";");
+                std::vector<std::string> res = splitString(line, ";");
 
                 titre = res[0];
-                auteur = res[1];
-                annee = std::stoi(res[2]);
-                disponible = res[3] == "1";
+                author = res[1];
+                year = std::stoi(res[2]);
+                available = res[3] == "1";
 
-                livre = Livre(titre, auteur, annee, disponible);
+                book = Book(titre, author, year, available);
 
-                collection[auteur].push_back(livre);
+                collection[author].push_back(book);
 
             } catch (std::exception const& e) {
                 std::cerr << "La bibliothèque n'a pas pu être chargée (erreur lecture : "
@@ -57,16 +57,16 @@ Bibliotheque::Bibliotheque(std::string const& baseDeDonnees) {
     }
 }
 
-Bibliotheque::~Bibliotheque() {
-    std::ofstream flux(sauvegarde.c_str());
+Library::~Library() {
+    std::ofstream flux(save.c_str());
 
     if (flux) {
         for (auto const& it : collection) {
-            auto const& livres = it.second;
+            auto const& books = it.second;
 
-            for (auto const& livre : livres) {
-                flux << livre.getTitre() << ";" << livre.getAuteur() << ";" << livre.getAnnee()
-                     << ";" << livre.getDisponibilite() << "\n";
+            for (auto const& book : books) {
+                flux << book.getTitle() << ";" << book.getAuthor() << ";" << book.getYear() << ";"
+                     << book.getAvailability() << "\n";
             }
         }
     } else {
@@ -78,37 +78,37 @@ Bibliotheque::~Bibliotheque() {
  * Methods
  ******************************************************************************************/
 
-void Bibliotheque::afficher() const {
+void Library::display() const {
     if (!collection.size()) {
-        std::cout << "Il n'y a aucun livre dans la bibliothèque\n";
+        std::cout << "Il n'y a aucun book dans la bibliothèque\n";
 
     } else {
         for (const auto& it : collection) {
-            const auto& auteur = it.first;
-            const auto& livres = it.second;
+            const auto& author = it.first;
+            const auto& books = it.second;
 
-            std::cout << "+ " << auteur << " :\n";
-            for (const auto& element : livres) {
+            std::cout << "+ " << author << " :\n";
+            for (const auto& element : books) {
                 std::cout << "| " << element;
             }
         }
     }
 }
 
-void Bibliotheque::ajouterLivre(std::string auteur, Livre livre) {
-    collection[auteur].push_back(livre);
+void Library::addBook(std::string const& author, Book book) {
+    collection[author].push_back(book);
 }
 
-std::vector<const Livre*> Bibliotheque::rechercherParTitre(std::string const& titre) const {
-    std::vector<const Livre*> resultats;
+std::vector<const Book*> Library::searchByTitle(std::string const& titre) const {
+    std::vector<const Book*> resultats;
 
     for (const auto& it : collection) {
-        const auto& auteur = it.first;
-        const auto& livres = it.second;
+        const auto& author = it.first;
+        const auto& books = it.second;
 
-        for (const auto& livre : livres) {
-            if (livre.getTitre() == titre) {
-                resultats.push_back(&livre);
+        for (const auto& book : books) {
+            if (book.getTitle() == titre) {
+                resultats.push_back(&book);
             }
         }
     }
@@ -116,8 +116,8 @@ std::vector<const Livre*> Bibliotheque::rechercherParTitre(std::string const& ti
     return resultats;
 }
 
-const std::vector<Livre>* Bibliotheque::rechercherParAuteur(std::string const& auteur) const {
-    auto it = collection.find(auteur);
+const std::vector<Book>* Library::searchByAuthor(std::string const& author) const {
+    auto it = collection.find(author);
 
     if (it == collection.end()) {
         throw std::string("Auteur non trouvé");
@@ -126,15 +126,15 @@ const std::vector<Livre>* Bibliotheque::rechercherParAuteur(std::string const& a
     return &it->second;
 }
 
-bool Bibliotheque::emprunterLivre(std::string auteur, std::string const& titre) {
-    if (!collection[auteur].empty()) {
-        auto& livres = collection[auteur];
+bool Library::borrowBook(std::string author, std::string const& titre) {
+    if (!collection[author].empty()) {
+        auto& books = collection[author];
 
         auto it = std::ranges::find_if(
-            livres, [&](const Livre& l) { return l.getTitre() == titre && l.getDisponibilite(); });
+            books, [&](const Book& l) { return l.getTitle() == titre && l.getAvailability(); });
 
-        if (it != livres.end()) {
-            it->setDisponibilite(false);
+        if (it != books.end()) {
+            it->setAvailability(false);
             return true;
         }
     }
@@ -142,12 +142,12 @@ bool Bibliotheque::emprunterLivre(std::string auteur, std::string const& titre) 
     return false;
 }
 
-bool Bibliotheque::retournerLivre(std::string auteur, std::string const& titre) {
-    auto livre = std::find_if(collection[auteur].begin(), collection[auteur].end(),
-                              [&](const Livre& obj) { return obj.getTitre() == titre; });
+bool Library::returnBook(std::string author, std::string const& titre) {
+    auto book = std::find_if(collection[author].begin(), collection[author].end(),
+                             [&](const Book& obj) { return obj.getTitle() == titre; });
 
-    if (livre != collection[auteur].end()) {
-        livre->setDisponibilite(true);
+    if (book != collection[author].end()) {
+        book->setAvailability(true);
         return true;
     }
 

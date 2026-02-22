@@ -10,33 +10,33 @@
  * Definition of the class
  ******************************************************************************************/
 
-class Livre {
+class Book {
     public:
-        Livre();
-        Livre(std::string const& titre, std::string const& auteur, int annee);
-        Livre(std::string const& titre, std::string const& auteur, int annee, bool disponible);
-        ~Livre();
+        Book();
+        Book(std::string const& title, std::string const& author, int year);
+        Book(std::string const& title, std::string const& author, int year, bool available);
+        ~Book();
 
-        void afficher() const;
+        void display() const;
 
-        std::string getAuteur() const;
-        std::string getTitre() const;
-        int getAnnee() const;
-        bool getDisponibilite() const;
+        std::string getAuthor() const;
+        std::string getTitle() const;
+        int getYear() const;
+        bool getAvailability() const;
 
-        void setDisponibilite(bool dispo);
+        void setAvailability(bool dispo);
 
     private:
-        std::string titre;
-        std::string auteur;
-        int annee;
-        bool disponible;
+        std::string title;
+        std::string author;
+        int year;
+        bool available;
 };
 
 /******************************************************************************************
  * Overloading of the operators
  ******************************************************************************************/
 
-std::ostream& operator<<(std::ostream& os, const Livre& livre);
+std::ostream& operator<<(std::ostream& os, const Book& livre);
 
 #endif  // INCLUDE_LIVRE_HPP_

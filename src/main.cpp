@@ -3,8 +3,8 @@
 #include <iostream>
 #include <vector>
 
-#include "Bibliotheque.hpp"
-#include "Livre.hpp"
+#include "Book.hpp"
+#include "Library.hpp"
 #include "utils.hpp"
 
 using namespace std;
@@ -14,133 +14,128 @@ using namespace std;
  ******************************************************************************************/
 
 int main(int argc, const char* argv[]) {
-    // Bibliotheque
-    Bibliotheque biblio("data/livres.txt");
+    Library library("data/books.txt");
 
-    // Affichage du menu
-    afficherMenu();
+    displayMenu();
 
-    // Choix de l'action
     int action = 0;
 
     while (action != 6) {
-        cout << "\nChoisir l'action : ";
+        cout << "\nSelect the action: ";
         cin >> action;
         cin.ignore();
 
-        // Action
-        if (action == 1) {  // Ajouter un livre
-            Livre livre;
-            string titre = "Titre";
-            string auteur = "Auteur";
-            int annee = 0;
+        if (action == 1) {  // Add a book
+            Book book;
+            string title = "Title";
+            string author = "Author";
+            int year = 0;
 
-            cout << "  Titre : ";
-            getline(cin, titre);
+            cout << "  Ttitle: ";
+            getline(cin, title);
 
-            cout << "  Auteur : ";
-            getline(cin, auteur);
+            cout << "  Author: ";
+            getline(cin, author);
 
-            cout << "  Année : ";
-            cin >> annee;
+            cout << "  Year: ";
+            cin >> year;
             cin.ignore();
 
-            livre = Livre(titre, auteur, annee);
+            book = Book(title, author, year);
 
-            biblio.ajouterLivre(auteur, livre);
+            library.addBook(author, book);
 
-        } else if (action == 2) {  // Rechercher un livre
-            int typeRecherche = 0;
+        } else if (action == 2) {  // Search for a book
+            int searchType = 0;
 
-            while (typeRecherche != 1 && typeRecherche != 2) {
-                cout << "  1. Rechercher par titre\n";
-                cout << "  2. Rechercher par auteur\n";
-                cout << "  3. Revenir au menu\n";
+            while (searchType != 1 && searchType != 2) {
+                cout << "  1. Search by title\n";
+                cout << "  2. Search by author\n";
+                cout << "  3. Back to the menu\n";
 
-                cin >> typeRecherche;
+                cin >> searchType;
                 cin.ignore();
 
-                if (typeRecherche == 1) {  // Recherche par titre
-                    string titreRecherche;
+                if (searchType == 1) {  // By title
+                    string titleSearched;
 
-                    cout << "Titre : ";
-                    getline(cin, titreRecherche);
+                    cout << "Title: ";
+                    getline(cin, titleSearched);
 
-                    vector<const Livre*> resultats = biblio.rechercherParTitre(titreRecherche);
+                    vector<const Book*> resultats = library.searchByTitle(titleSearched);
 
                     if (!resultats.empty()) {
-                        for (const auto& livre : resultats) {
-                            livre->afficher();
+                        for (const auto& book : resultats) {
+                            book->display();
                         }
                     } else {
-                        cout << "Titre non trouvé\n";
+                        cout << "Title not found\n";
                     }
 
-                } else if (typeRecherche == 2) {  // Recherche par auteur
-                    string auteurRecherche;
+                } else if (searchType == 2) {  // By author
+                    string authorSearched;
 
-                    cout << "Auteur : ";
-                    getline(cin, auteurRecherche);
+                    cout << "Author: ";
+                    getline(cin, authorSearched);
 
                     try {
-                        const vector<Livre>* auteurBiblio =
-                            biblio.rechercherParAuteur(auteurRecherche);
+                        const vector<Book>* authorBiblio = library.searchByAuthor(authorSearched);
 
-                        for (const auto& livre : *auteurBiblio) {
-                            livre.afficher();
+                        for (const auto& book : *authorBiblio) {
+                            book.display();
                         }
                     } catch (string const& erreur) {
                         cerr << erreur << "\n";
                     }
 
-                } else if (typeRecherche == 3) {  // Revenir au menu
+                } else if (searchType == 3) {  // Back to the menu
                     break;
 
                 } else {
-                    cout << "Choix non reconnu\n";
+                    cout << "Incorrect choice\n";
                 }
             }
 
-        } else if (action == 3) {  // Afficher les livres disponibles
-            biblio.afficher();
+        } else if (action == 3) {  // Display available books
+            library.display();
 
-        } else if (action == 4) {  // Emprunter un livre
-            string titreEmprunt = "";
-            string auteurEmprunt = "";
+        } else if (action == 4) {  // Borrow a book
+            string titleEmprunt = "";
+            string authorEmprunt = "";
 
-            cout << "  Titre : ";
-            getline(cin, titreEmprunt);
+            cout << "  Title: ";
+            getline(cin, titleEmprunt);
 
-            cout << "  Auteur : ";
-            getline(cin, auteurEmprunt);
+            cout << "  Author: ";
+            getline(cin, authorEmprunt);
 
-            if (biblio.emprunterLivre(auteurEmprunt, titreEmprunt)) {
-                cout << "Livre '" << titreEmprunt << "' emprunté\n";
+            if (library.borrowBook(authorEmprunt, titleEmprunt)) {
+                cout << "Book '" << titleEmprunt << "' borrowed\n";
             } else {
-                cout << "Livre non trouvé\n";
+                cout << "Book not found\n";
             }
 
-        } else if (action == 5) {  // Retourner un livre
-            string titreRetourne = "";
-            string auteurRetourne = "";
+        } else if (action == 5) {  // Return a book
+            string titleRetourne = "";
+            string authorRetourne = "";
 
-            cout << "  Titre : ";
-            getline(cin, titreRetourne);
+            cout << "  Title: ";
+            getline(cin, titleRetourne);
 
-            cout << "  Auteur : ";
-            getline(cin, auteurRetourne);
+            cout << "  Author: ";
+            getline(cin, authorRetourne);
 
-            if (biblio.retournerLivre(auteurRetourne, titreRetourne)) {
-                cout << "Livre '" << titreRetourne << "' retourné\n";
+            if (library.returnBook(authorRetourne, titleRetourne)) {
+                cout << "Book '" << titleRetourne << "' returned\n";
             } else {
-                cout << "Livre non trouvé\n";
+                cout << "Book not found\n";
             }
 
-        } else if (action == 6) {  // Quitter
+        } else if (action == 6) {  // Exit
             return 0;
 
         } else {
-            cout << "Choix non reconnu\n";
+            cout << "Incorrect choice\n";
         }
     }
 

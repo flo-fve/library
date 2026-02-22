@@ -7,30 +7,30 @@
 #include <string>
 #include <vector>
 
-#include "Livre.hpp"
+#include "Book.hpp"
 
-typedef std::map<std::string, std::vector<Livre>> Collection;
+typedef std::map<std::string, std::vector<Book>> Collection;
 
 /******************************************************************************************
  * Definition of the class
  ******************************************************************************************/
 
-class Bibliotheque {
+class Library {
     public:
-        Bibliotheque();
-        explicit Bibliotheque(std::string const& baseDeDonnees);
-        ~Bibliotheque();
+        Library();
+        explicit Library(std::string const& data);
+        ~Library();
 
-        void afficher() const;
-        void ajouterLivre(std::string auteur, Livre livre);
-        std::vector<const Livre*> rechercherParTitre(std::string const& titre) const;
-        const std::vector<Livre>* rechercherParAuteur(std::string const& auteur) const;
-        bool emprunterLivre(std::string auteur, std::string const& titre);
-        bool retournerLivre(std::string auteur, std::string const& titre);
+        void display() const;
+        void addBook(std::string const& author, Book book);
+        std::vector<const Book*> searchByTitle(std::string const& title) const;
+        const std::vector<Book>* searchByAuthor(std::string const& author) const;
+        bool borrowBook(std::string author, std::string const& title);
+        bool returnBook(std::string author, std::string const& title);
 
     private:
         Collection collection;
-        std::string sauvegarde;
+        std::string save;
 };
 
 #endif  // INCLUDE_BIBLIOTHEQUE_HPP_

@@ -1,5 +1,5 @@
 Les Fleurs du Mal;Baudelaire;1857;1
 Salut c'est cool;Flo Favre;2026;0
-La Maison Vide;Laurent Mauvignier;2025;1
+La Maison Vide;Laurent Mauvignier;2025;0
 Les Misérables;Victor Hugo;1862;1
 Les Contemplations;Victor Hugo;2856;1
