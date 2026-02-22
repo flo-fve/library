@@ -1,3 +1,5 @@
+default_stages: [pre-commit]
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -11,10 +13,31 @@ repos:
     rev: v21.1.8
     hooks:
       - id: clang-format
+        name: clang-format
+        args: [-i]
+        types_or: [c, c++, header]
+        exclude: ^(build/|external/|third_party/)
 
-  - repo: https://github.com/pocc/pre-commit-hooks
-    rev: v1.3.5
+  - repo: local
     hooks:
       - id: clang-tidy
-        args: ["-p=build"]
+        name: clang-tidy
+        entry: bash -c 'clang-tidy -p build --quiet "$@"'
+        language: system
+        types_or: [c, c++, header]
+        files: \.(c|cc|cpp|cxx|h|hh|hpp|hxx)$
+        pass_filenames: true
+        exclude: ^(build/|external/|third_party/)
+
+  - repo: local
+    hooks:
       - id: cppcheck
+        name: cppcheck (project mode)
+        entry: cppcheck
+          --project=build/compile_commands.json
+          --enable=warning,style,performance,portability
+          --inline-suppr
+          --quiet
+          --error-exitcode=1
+        language: system
+        pass_filenames: false
