@@ -46,14 +46,14 @@ Library::Library(std::string const& data) {
                 collection[author].push_back(book);
 
             } catch (std::exception const& e) {
-                std::cerr << "La bibliothèque n'a pas pu être chargée (erreur lecture : "
-                          << e.what() << ")\n";
+                std::cerr << "The library could not be loaded (error reading): " << e.what()
+                          << ")\n";
 
                 break;
             }
         }
     } else {
-        std::cerr << "La bibliothèque n'a pas pu être chargée (erreur fichier)\n";
+        std::cerr << "The library could not be loaded (error file)\n";
     }
 }
 
@@ -70,7 +70,7 @@ Library::~Library() {
             }
         }
     } else {
-        std::cerr << "La bibliothèque n'a pas pu être sauvegardée (erreur fichier)\n";
+        std::cerr << "The library could not be saved (error file)\n";
     }
 }
 
@@ -80,7 +80,7 @@ Library::~Library() {
 
 void Library::display() const {
     if (!collection.size()) {
-        std::cout << "Il n'y a aucun book dans la bibliothèque\n";
+        std::cout << "There are no book in the library\n";
 
     } else {
         for (const auto& it : collection) {
@@ -120,7 +120,7 @@ const std::vector<Book>* Library::searchByAuthor(std::string const& author) cons
     auto it = collection.find(author);
 
     if (it == collection.end()) {
-        throw std::string("Auteur non trouvé");
+        throw std::string("Author not found");
     }
 
     return &it->second;
