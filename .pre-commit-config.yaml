@@ -22,7 +22,8 @@ repos:
     hooks:
       - id: clang-tidy
         name: clang-tidy
-        entry: bash -c 'clang-tidy -p build --quiet "$@"'
+        entry: clang-tidy
+        args: [-p, build, --quiet]
         language: system
         types_or: [c, c++, header]
         files: \.(c|cc|cpp|cxx|h|hh|hpp|hxx)$
