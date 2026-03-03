@@ -1,5 +1,24 @@
+L'Étranger;Albert Camus;1942;1
+La Peste;Albert Camus;1947;1
+Le Meilleur des mondes;Aldous Huxley;1932;1
+Le Comte de Monte-Cristo;Alexandre Dumas;1844;1
+Le Petit Prince;Antoine de Saint-Exupéry;1943;1
 Les Fleurs du Mal;Baudelaire;1857;1
+Dracula;Bram Stoker;1897;1
+Crime et Châtiment;Fiodor Dostoïevski;1866;0
 Salut c'est cool;Flo Favre;2026;0
+Dune;Frank Herbert;1965;1
+La Métamorphose;Franz Kafka;1915;1
+1984;George Orwell;1949;0
+Moby Dick;Herman Melville;1851;1
+Fondation;Isaac Asimov;1951;0
+Harry Potter à l'école des sorciers;J.K. Rowling;1997;0
+Le Seigneur des Anneaux;J.R.R. Tolkien;1954;1
+Orgueil et Préjugés;Jane Austen;1813;1
 La Maison Vide;Laurent Mauvignier;2025;0
+Fahrenheit 451;Ray Bradbury;1953;0
+Chroniques martiennes;Ray Bradbury;1950;1
+Le Nom de la rose;Umberto Eco;1980;0
 Les Misérables;Victor Hugo;1862;1
 Les Contemplations;Victor Hugo;2856;1
+Germinal;Émile Zola;1885;1
