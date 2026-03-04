@@ -99,15 +99,21 @@ void Library::addBook(std::string const& author, Book book) {
     collection[author].push_back(book);
 }
 
-std::vector<const Book*> Library::searchByTitle(std::string const& titre) const {
+std::vector<const Book*> Library::searchByTitle(std::string title) const {
     std::vector<const Book*> resultats;
+
+    title = slugify(title);
 
     for (const auto& it : collection) {
         const auto& author = it.first;
         const auto& books = it.second;
 
         for (const auto& book : books) {
-            if (book.getTitle() == titre) {
+            std::string titleBook = book.getTitle();
+
+            titleBook = slugify(titleBook);
+
+            if (titleBook == title) {
                 resultats.push_back(&book);
             }
         }

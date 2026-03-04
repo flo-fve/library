@@ -14,4 +14,6 @@ void displayMenu();
 
 std::vector<std::string> splitString(const std::string& s, const std::string& delimiter);
 
+std::string slugify(std::string input);
+
 #endif  // INCLUDE_UTILS_HPP_

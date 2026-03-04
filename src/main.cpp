@@ -31,7 +31,7 @@ int main(int argc, const char* argv[]) {
             string author = "Author";
             int year = 0;
 
-            cout << "  Ttitle: ";
+            cout << "  Title: ";
             getline(cin, title);
 
             cout << "  Author: ";
@@ -53,6 +53,7 @@ int main(int argc, const char* argv[]) {
                 cout << "  2. Search by author\n";
                 cout << "  3. Back to the menu\n";
 
+                cout << "  Choice: ";
                 cin >> searchType;
                 cin.ignore();
 
