@@ -33,12 +33,16 @@ repos:
   - repo: local
     hooks:
       - id: cppcheck
-        name: cppcheck (project mode)
+        name: cppcheck
         entry: cppcheck
-          --project=build/compile_commands.json
           --enable=warning,style,performance,portability
           --inline-suppr
           --quiet
           --error-exitcode=1
+          --std=c++20
+          --language=c++
+          -I include
+          src
+          include
         language: system
         pass_filenames: false
