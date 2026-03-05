@@ -22,6 +22,10 @@ class Library {
         ~Library();
 
         void display() const;
+
+        int numberAuthors() const;
+        int numberBooks() const;
+
         void addBook(std::string const& author, Book book);
         std::vector<const Book*> searchByTitle(std::string title) const;
         const std::vector<Book>* searchByAuthor(std::string const& author) const;

@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <numeric>
+#include <ranges>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -93,6 +95,18 @@ void Library::display() const {
             }
         }
     }
+}
+
+int Library::numberAuthors() const {
+    return collection.size();
+}
+
+int Library::numberBooks() const {
+    size_t total =
+        std::transform_reduce(collection.begin(), collection.end(), size_t{0}, std::plus<>(),
+                              [](const auto& pair) { return pair.second.size(); });
+
+    return total;
 }
 
 void Library::addBook(std::string const& author, Book book) {
