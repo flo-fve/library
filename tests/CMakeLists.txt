@@ -11,13 +11,16 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
+file(GLOB TEST_SOURCES "*.cpp")
+
 add_executable(UnitTests
-    test_library.cpp
+    ${TEST_SOURCES}
 )
 
 target_link_libraries(UnitTests
     PRIVATE
     LibraryLib
+    GTest::gtest
     GTest::gtest_main
 )
 
