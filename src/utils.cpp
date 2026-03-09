@@ -14,12 +14,14 @@
  ******************************************************************************************/
 
 void displayMenu() {
-    std::cout << "1. Add a book\n";
-    std::cout << "2. Search for a book\n";
-    std::cout << "3. Display the books\n";
-    std::cout << "4. Borrow a book\n";
-    std::cout << "5. Return a book\n";
-    std::cout << "6. Exit\n";
+    std::cout << "\n+----------------------\n";
+    std::cout << "| 1. Add a book\n";
+    std::cout << "| 2. Search for a book\n";
+    std::cout << "| 3. Display the books\n";
+    std::cout << "| 4. Borrow a book\n";
+    std::cout << "| 5. Return a book\n";
+    std::cout << "| 6. Exit\n";
+    std::cout << "+----------------------\n";
 }
 
 std::vector<std::string> splitString(const std::string& s, const std::string& delimiter) {
