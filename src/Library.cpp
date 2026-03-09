@@ -109,6 +109,16 @@ int Library::numberBooks() const {
     return total;
 }
 
+std::vector<Book> Library::getBooks() {
+    std::vector<Book> books;
+
+    for (const auto& it : collection) {
+        books.insert(books.end(), it.second.begin(), it.second.end());
+    }
+
+    return books;
+}
+
 void Library::addBook(std::string const& author, Book book) {
     collection[author].push_back(book);
 }

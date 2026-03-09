@@ -24,12 +24,12 @@ int main(int argc, const char* argv[]) {
 
     Library library(data);
 
-    displayMenu();
-
     int action = 0;
 
     while (action != 6) {
-        cout << "\nSelect the action: ";
+        displayMenu();
+
+        cout << "Select the action: ";
         cin >> action;
         cin.ignore();
 

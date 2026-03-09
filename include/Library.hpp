@@ -23,6 +23,7 @@ class Library {
 
         void display() const;
 
+        std::vector<Book> getBooks();
         int numberAuthors() const;
         int numberBooks() const;
 

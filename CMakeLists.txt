@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # ========================
-# Library (code testable)
+# Library
 # ========================
 
 add_library(LibraryLib
@@ -22,16 +22,16 @@ target_include_directories(LibraryLib
 )
 
 # ========================
-# Main executable
+# Applications
 # ========================
 
-add_executable(main
-    src/main.cpp
-)
+add_subdirectory(apps/cli)
 
-target_link_libraries(main
-    PRIVATE LibraryLib
-)
+option(BUILD_GUI "Build Qt GUI" ON)
+
+if(BUILD_GUI)
+    add_subdirectory(apps/gui)
+endif()
 
 # ========================
 # Tests
