@@ -14,7 +14,15 @@ using namespace std;
  ******************************************************************************************/
 
 int main(int argc, const char* argv[]) {
-    Library library("data/books.txt");
+    string data;
+
+    if (argc == 2) {
+        data = argv[1];
+    } else {
+        data = "";
+    }
+
+    Library library(data);
 
     displayMenu();
 
