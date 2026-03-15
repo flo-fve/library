@@ -8,6 +8,13 @@ qt_add_executable(library_gui
     AddBookDialog.cpp
 )
 
+qt_add_resources(library_gui "app_resources"
+    PREFIX "/"
+    BASE ${PROJECT_SOURCE_DIR}
+    FILES
+        ${PROJECT_SOURCE_DIR}/resources/style.qss
+)
+
 target_link_libraries(library_gui
     PRIVATE
         Qt6::Widgets

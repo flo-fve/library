@@ -34,21 +34,24 @@ MainWindow::MainWindow(Library& library) : library(library) {
     table->horizontalHeader()->setStretchLastSection(true);
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
 
+    // Buttons layout
+    auto* buttonsLayout = new QHBoxLayout;
+    auto* buttonWidget = new QWidget;
+
+    buttonWidget->setLayout(buttonsLayout);
+    buttonWidget->setStyleSheet("QWidget { border: 1px solid gray; padding: 4px; }");
+
     // Add book dialog
     addButton = new QPushButton("Add", this);
-    removeButton = new QPushButton("Remove selected", this);
+    buttonsLayout->addWidget(addButton);
 
     connect(addButton, &QPushButton::clicked, this, &MainWindow::addBook);
 
-    auto* bookLayout = new QHBoxLayout;
-    bookLayout->addWidget(addButton);
-    bookLayout->addWidget(removeButton);
-
-    auto* buttonWidget = new QWidget;
-    buttonWidget->setLayout(bookLayout);
-    buttonWidget->setStyleSheet("QWidget { border: 1px solid gray; padding: 4px; }");
-
     // Remove button
+    removeButton = new QPushButton("Remove selected", this);
+    removeButton->setObjectName("removeButton");
+    buttonsLayout->addWidget(removeButton);
+
     connect(removeButton, &QPushButton::clicked, this, &MainWindow::removeSelectedBook);
 
     // Layout assembly

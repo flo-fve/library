@@ -1,0 +1,67 @@
+/* ── Global ──────────────────────────────────────────── */
+QMainWindow, QWidget {
+    background-color: #16213e;
+    color: #e0e0e0;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+}
+
+/* ── QLineEdit (search bar) ──────────────────── */
+QLineEdit {
+    background-color: #0f3460;
+    border: 1px solid #1e4a7a;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #e0e0e0;
+}
+QLineEdit:focus {
+    border-color: #2563eb;
+}
+
+/* ── QPushButton ─────────────────────────────────────── */
+QPushButton {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 16px;
+}
+QPushButton:hover {
+    background-color: #1d4ed8;
+}
+QPushButton:pressed {
+    background-color: #1e40af;
+}
+
+/* "danger" for Remove button */
+QPushButton#removeButton {
+    background-color: transparent;
+    border: 1px solid #e24b4a;
+    color: #e24b4a;
+}
+QPushButton#removeButton:hover {
+    background-color: rgba(226, 75, 74, 0.13);
+}
+
+/* ── QTableWidget ────────────────────────────────────── */
+QTableWidget {
+    background-color: #16213e;
+    border: none;
+    gridline-color: rgba(15, 52, 96, 0.4);
+}
+QTableWidget::item {
+    padding: 8px 12px;
+    color: #c8d8e8;
+}
+QTableWidget::item:selected {
+    background-color: rgba(37, 99, 235, 0.2);
+    color: white;
+    border-left: 3px solid #2563eb;
+}
+QHeaderView::section {
+    background-color: #0f3460;
+    color: #7ea8d0;
+    padding: 8px 12px;
+    border: none;
+    font-weight: 500;
+}

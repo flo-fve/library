@@ -1,6 +1,7 @@
 // Copyright 2026 Florian Favre
 
 #include <QApplication>
+#include <QFile>
 #include <string>
 
 #include "MainWindow.hpp"
@@ -13,6 +14,13 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
+
+    // Load the syle file
+    QFile styleFile(":/resources/style.qss");
+    if (styleFile.open(QFile::ReadOnly)) {
+        app.setStyleSheet(styleFile.readAll());
+        styleFile.close();
+    }
 
     // Instanciate the library
     string data;
