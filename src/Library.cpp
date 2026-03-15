@@ -123,6 +123,22 @@ void Library::addBook(std::string const& author, Book book) {
     collection[author].push_back(book);
 }
 
+void Library::removeBook(std::string const& author, std::string const& title) {
+    auto it = collection.find(author);
+    if (it == collection.end()) {
+        return;
+    }
+
+    auto& books = it->second;
+    books.erase(std::remove_if(books.begin(), books.end(),
+                               [&title](const Book& b) { return b.getTitle() == title; }),
+                books.end());
+
+    if (books.empty()) {
+        collection.erase(it);
+    }
+}
+
 std::vector<const Book*> Library::searchByTitle(std::string title) const {
     std::vector<const Book*> resultats;
 

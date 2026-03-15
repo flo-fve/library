@@ -28,6 +28,7 @@ class Library {
         int numberBooks() const;
 
         void addBook(std::string const& author, Book book);
+        void removeBook(std::string const& author, std::string const& title);
         std::vector<const Book*> searchByTitle(std::string title) const;
         const std::vector<Book>* searchByAuthor(std::string const& author) const;
         bool borrowBook(std::string author, std::string const& title);

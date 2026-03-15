@@ -5,11 +5,15 @@
 #include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QTableWidget>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <iostream>
 
+#include "AddBookDialog.hpp"
+#include "Book.hpp"
 #include "Library.hpp"
 
 /******************************************************************************************
@@ -25,23 +29,32 @@ MainWindow::MainWindow(Library& library) : library(library) {
     searchBar->setPlaceholderText("Search...");
 
     // Table
-    table = new QTableWidget(0, 2);
-    table->setHorizontalHeaderLabels({"Author", "Title"});
+    table = new QTableWidget(0, 4);
+    table->setHorizontalHeaderLabels({"Author", "Title", "Year", "Available"});
     table->horizontalHeader()->setStretchLastSection(true);
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    // Buttons
-    addButton = new QPushButton("Add");
-    removeButton = new QPushButton("Remove");
+    // Add book dialog
+    addButton = new QPushButton("Add", this);
+    removeButton = new QPushButton("Remove selected", this);
 
-    auto* buttonLayout = new QHBoxLayout;
-    buttonLayout->addWidget(addButton);
-    buttonLayout->addWidget(removeButton);
+    connect(addButton, &QPushButton::clicked, this, &MainWindow::addBook);
+
+    auto* bookLayout = new QHBoxLayout;
+    bookLayout->addWidget(addButton);
+    bookLayout->addWidget(removeButton);
+
+    auto* buttonWidget = new QWidget;
+    buttonWidget->setLayout(bookLayout);
+    buttonWidget->setStyleSheet("QWidget { border: 1px solid gray; padding: 4px; }");
+
+    // Remove button
+    connect(removeButton, &QPushButton::clicked, this, &MainWindow::removeSelectedBook);
 
     // Layout assembly
     mainLayout->addWidget(searchBar);
     mainLayout->addWidget(table);
-    mainLayout->addLayout(buttonLayout);
+    mainLayout->addWidget(buttonWidget);
 
     central->setLayout(mainLayout);
     setCentralWidget(central);
@@ -51,6 +64,8 @@ MainWindow::MainWindow(Library& library) : library(library) {
 
     populateTable();
 }
+
+MainWindow::~MainWindow() {}
 
 /******************************************************************************************
  * Methods
@@ -63,7 +78,44 @@ void MainWindow::populateTable() {
 
     for (size_t i = 0; i < books.size(); ++i) {
         table->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(books[i].getAuthor())));
-
         table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(books[i].getTitle())));
+        table->setItem(i, 2, new QTableWidgetItem(QString::number(books[i].getYear())));
+        table->setItem(i, 3, new QTableWidgetItem(QString::number(books[i].getAvailability())));
+    }
+}
+
+void MainWindow::addBook() {
+    AddBookDialog dialog(this);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        std::string title = dialog.getTitle();
+        std::string author = dialog.getAuthor();
+        int year = dialog.getYear();
+
+        if (!title.empty() && !author.empty()) {
+            Book book(title, author, year);
+            library.addBook(author, book);
+
+            populateTable();
+        }
+    }
+}
+
+void MainWindow::removeSelectedBook() {
+    int selectedRow = table->currentRow();
+
+    if (selectedRow == -1) {
+        QMessageBox::warning(this, "No selection", "Please select a book to remove.");
+        return;
+    }
+
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this, "Confirm", "Remove the selected book?", QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        QString author = table->item(selectedRow, 0)->text();
+        QString title = table->item(selectedRow, 1)->text();
+        library.removeBook(author.toStdString(), title.toStdString());
+        table->removeRow(selectedRow);
     }
 }

@@ -16,8 +16,11 @@ class QTableWidget;
 class QPushButton;
 
 class MainWindow : public QMainWindow {
+        Q_OBJECT
+
     public:
         explicit MainWindow(Library& library);
+        ~MainWindow();
 
     private:
         Library& library;
@@ -28,6 +31,9 @@ class MainWindow : public QMainWindow {
         QPushButton* removeButton;
 
         void populateTable();
+
+        void addBook();
+        void removeSelectedBook();
 };
 
 #endif  // MAINWINDOW_HPP_
