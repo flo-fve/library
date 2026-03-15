@@ -26,32 +26,15 @@ int main(int argc, const char* argv[]) {
 
     int action = 0;
 
-    while (action != 6) {
+    while (action != 7) {
         displayMenu();
 
         cout << "Select the action: ";
         cin >> action;
         cin.ignore();
 
-        if (action == 1) {  // Add a book
-            Book book;
-            string title = "Title";
-            string author = "Author";
-            int year = 0;
-
-            cout << "  Title: ";
-            getline(cin, title);
-
-            cout << "  Author: ";
-            getline(cin, author);
-
-            cout << "  Year: ";
-            cin >> year;
-            cin.ignore();
-
-            book = Book(title, author, year);
-
-            library.addBook(author, book);
+        if (action == 1) {  // Display the books
+            library.display();
 
         } else if (action == 2) {  // Search for a book
             int searchType = 0;
@@ -105,42 +88,71 @@ int main(int argc, const char* argv[]) {
                 }
             }
 
-        } else if (action == 3) {  // Display available books
-            library.display();
-
-        } else if (action == 4) {  // Borrow a book
-            string titleEmprunt = "";
-            string authorEmprunt = "";
+        } else if (action == 3) {  // Borrow a book
+            string titleBorrowed = "";
+            string authorBorrowed = "";
 
             cout << "  Title: ";
-            getline(cin, titleEmprunt);
+            getline(cin, titleBorrowed);
 
             cout << "  Author: ";
-            getline(cin, authorEmprunt);
+            getline(cin, authorBorrowed);
 
-            if (library.borrowBook(authorEmprunt, titleEmprunt)) {
-                cout << "Book '" << titleEmprunt << "' borrowed\n";
+            if (library.borrowBook(authorBorrowed, titleBorrowed)) {
+                cout << "Book '" << titleBorrowed << "' borrowed\n";
             } else {
                 cout << "Book not found\n";
             }
 
-        } else if (action == 5) {  // Return a book
-            string titleRetourne = "";
-            string authorRetourne = "";
+        } else if (action == 4) {  // Return a book
+            string titleReturned = "";
+            string authorReturned = "";
 
             cout << "  Title: ";
-            getline(cin, titleRetourne);
+            getline(cin, titleReturned);
 
             cout << "  Author: ";
-            getline(cin, authorRetourne);
+            getline(cin, authorReturned);
 
-            if (library.returnBook(authorRetourne, titleRetourne)) {
-                cout << "Book '" << titleRetourne << "' returned\n";
+            if (library.returnBook(authorReturned, titleReturned)) {
+                cout << "Book '" << titleReturned << "' returned\n";
             } else {
                 cout << "Book not found\n";
             }
 
-        } else if (action == 6) {  // Exit
+        } else if (action == 5) {  // Add a book
+            Book book;
+            string title = "Title";
+            string author = "Author";
+            int year = 0;
+
+            cout << "  Title: ";
+            getline(cin, title);
+
+            cout << "  Author: ";
+            getline(cin, author);
+
+            cout << "  Year: ";
+            cin >> year;
+            cin.ignore();
+
+            book = Book(title, author, year);
+
+            library.addBook(author, book);
+
+        } else if (action == 6) {  // Remove a book
+            string title = "Title";
+            string author = "Author";
+
+            cout << "  Title: ";
+            getline(cin, title);
+
+            cout << "  Author: ";
+            getline(cin, author);
+
+            library.removeBook(author, title);
+
+        } else if (action == 7) {  // Exit
             return 0;
 
         } else {
