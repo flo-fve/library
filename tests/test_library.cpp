@@ -23,3 +23,20 @@ TEST(LibraryTest, AddBookTest) {
     EXPECT_EQ(library.numberAuthors(), 1);
     EXPECT_EQ(library.numberBooks(), 2);
 }
+
+TEST(LibraryTest, RemoveBookTest) {
+    Library library;
+
+    // Add a new book and a new author entry
+    Book book("Title", "Author", 2026);
+    library.addBook("Author", book);
+
+    EXPECT_EQ(library.numberAuthors(), 1);
+    EXPECT_EQ(library.numberBooks(), 1);
+
+    // Remove this book
+    library.removeBook("Author", "Title");
+
+    EXPECT_EQ(library.numberAuthors(), 0);
+    EXPECT_EQ(library.numberBooks(), 0);
+}
