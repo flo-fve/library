@@ -5,6 +5,8 @@
 
 #include <QDialog>
 
+#include "ui_AddBookDialog.h"
+
 /******************************************************************************************
  * Definition of the classes
  ******************************************************************************************/
@@ -16,15 +18,14 @@ class AddBookDialog : public QDialog {
 
     public:
         explicit AddBookDialog(QWidget* parent = nullptr);
+        ~AddBookDialog();
 
         std::string getTitle() const;
         std::string getAuthor() const;
         int getYear() const;
 
     private:
-        QLineEdit* titleEdit;
-        QLineEdit* authorEdit;
-        QLineEdit* yearEdit;
+        Ui::AddBookDialog* ui;
 };
 
 #endif  // ADDBOOKDIALOG_HPP_

@@ -6,6 +6,7 @@
 #include <QMainWindow>
 
 #include "Library.hpp"
+#include "ui_MainWindow.h"
 
 /******************************************************************************************
  * Definition of the classes
@@ -23,12 +24,8 @@ class MainWindow : public QMainWindow {
         ~MainWindow();
 
     private:
+        Ui::MainWindow* ui;
         Library& library;
-
-        QLineEdit* searchBar;
-        QTableWidget* table;
-        QPushButton* addButton;
-        QPushButton* removeButton;
 
         void populateTable();
 

@@ -5,7 +5,9 @@ qt_standard_project_setup()
 qt_add_executable(library_gui
     main.cpp
     MainWindow.cpp
+    MainWindow.ui
     AddBookDialog.cpp
+    AddBookDialog.ui
 )
 
 qt_add_resources(library_gui "app_resources"
