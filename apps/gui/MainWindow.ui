@@ -48,10 +48,10 @@
          <number>4</number>
         </property>
         <attribute name="horizontalHeaderMinimumSectionSize">
-         <number>50</number>
+         <number>80</number>
         </attribute>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>100</number>
+         <number>110</number>
         </attribute>
         <attribute name="horizontalHeaderHighlightSections">
          <bool>true</bool>
@@ -76,7 +76,7 @@
         </column>
         <column>
          <property name="text">
-          <string>Available</string>
+          <string>Status</string>
          </property>
         </column>
        </widget>

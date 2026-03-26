@@ -20,6 +20,8 @@ MainWindow::MainWindow(Library& library)
     ui->table->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     ui->table->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 
+    ui->table->verticalHeader()->setDefaultSectionSize(40);
+
     // Connect buttons to slots
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::addBook);
     connect(ui->removeButton, &QPushButton::clicked, this, &MainWindow::removeSelectedBook);
@@ -45,7 +47,18 @@ void MainWindow::populateTable() {
                            new QTableWidgetItem(QString::fromStdString(books[i].getAuthor())));
         ui->table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(books[i].getTitle())));
         ui->table->setItem(i, 2, new QTableWidgetItem(QString::number(books[i].getYear())));
-        ui->table->setItem(i, 3, new QTableWidgetItem(QString::number(books[i].getAvailability())));
+
+        QLabel* badge = new QLabel(books[i].getAvailability() ? "Available" : "Borrowed");
+        badge->setAlignment(Qt::AlignCenter);
+        badge->setStyleSheet(books[i].getAvailability()
+                                 ? "color: #5dcaa5; background: rgba(29,158,117,0.13);"
+                                   "border: 1px solid rgba(93,202,165,0.3);"
+                                   "border-radius: 8px; padding: 2px 10px;"
+                                 : "color: #ef9f27; background: rgba(186,117,23,0.13);"
+                                   "border: 1px solid rgba(239,159,39,0.3);"
+                                   "border-radius: 8px; padding: 2px 10px;");
+
+        ui->table->setCellWidget(i, 3, badge);
     }
 }
 
