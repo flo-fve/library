@@ -40,6 +40,9 @@ MainWindow::~MainWindow() {
 void MainWindow::populateTable() {
     const auto& books = library.getBooks();
 
+    // Clean the table before populating
+    ui->table->setRowCount(0);
+
     ui->table->setRowCount(books.size());
 
     for (size_t i = 0; i < books.size(); ++i) {
