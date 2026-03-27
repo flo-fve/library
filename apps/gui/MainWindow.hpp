@@ -28,7 +28,7 @@ class MainWindow : public QMainWindow {
         Library& library;
 
         void populateTable();
-
+        void filterTable(const QString& text);
         void addBook();
         void removeSelectedBook();
         void borrowBook();

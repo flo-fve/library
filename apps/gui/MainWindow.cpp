@@ -22,6 +22,9 @@ MainWindow::MainWindow(Library& library)
 
     ui->table->verticalHeader()->setDefaultSectionSize(40);
 
+    // Search bar
+    connect(ui->searchBar, &QLineEdit::textChanged, this, &MainWindow::filterTable);
+
     // Connect buttons to slots
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::addBook);
     connect(ui->removeButton, &QPushButton::clicked, this, &MainWindow::removeSelectedBook);
@@ -64,6 +67,22 @@ void MainWindow::populateTable() {
                                    "border-radius: 8px; padding: 2px 10px;");
 
         ui->table->setCellWidget(i, 3, badge);
+    }
+}
+
+void MainWindow::filterTable(const QString& text) {
+    for (int row = 0; row < ui->table->rowCount(); ++row) {
+        bool match = false;
+
+        for (int col = 0; col < ui->table->columnCount(); ++col) {
+            QTableWidgetItem* item = ui->table->item(row, col);
+            if (item && item->text().contains(text, Qt::CaseInsensitive)) {
+                match = true;
+                break;
+            }
+        }
+
+        ui->table->setRowHidden(row, !match);
     }
 }
 
