@@ -26,6 +26,7 @@ MainWindow::MainWindow(Library& library)
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::addBook);
     connect(ui->removeButton, &QPushButton::clicked, this, &MainWindow::removeSelectedBook);
     connect(ui->borrowButton, &QPushButton::clicked, this, &MainWindow::borrowBook);
+    connect(ui->returnButton, &QPushButton::clicked, this, &MainWindow::returnBook);
 
     populateTable();
 }
@@ -122,4 +123,22 @@ void MainWindow::borrowBook() {
     }
 }
 
-void MainWindow::returnBook() {}
+void MainWindow::returnBook() {
+    int selectedRow = ui->table->currentRow();
+
+    if (selectedRow == -1) {
+        QMessageBox::warning(this, "No selection", "Please select a book to return.");
+        return;
+    }
+
+    QString author = ui->table->item(selectedRow, 0)->text();
+    QString title = ui->table->item(selectedRow, 1)->text();
+
+    bool returned = library.returnBook(author.toStdString(), title.toStdString());
+
+    if (!returned) {
+        QMessageBox::warning(this, "Error", "The book could not be returned");
+    } else {
+        populateTable();
+    }
+}

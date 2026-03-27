@@ -67,6 +67,9 @@
         </item>
         <item>
          <widget class="Line" name="verticalLine">
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
