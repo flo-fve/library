@@ -31,6 +31,8 @@ class MainWindow : public QMainWindow {
 
         void addBook();
         void removeSelectedBook();
+        void borrowBook();
+        void returnBook();
 };
 
 #endif  // MAINWINDOW_HPP_

@@ -25,6 +25,7 @@ MainWindow::MainWindow(Library& library)
     // Connect buttons to slots
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::addBook);
     connect(ui->removeButton, &QPushButton::clicked, this, &MainWindow::removeSelectedBook);
+    connect(ui->borrowButton, &QPushButton::clicked, this, &MainWindow::borrowBook);
 
     populateTable();
 }
@@ -100,3 +101,25 @@ void MainWindow::removeSelectedBook() {
         ui->table->removeRow(selectedRow);
     }
 }
+
+void MainWindow::borrowBook() {
+    int selectedRow = ui->table->currentRow();
+
+    if (selectedRow == -1) {
+        QMessageBox::warning(this, "No selection", "Please select a book to borrow.");
+        return;
+    }
+
+    QString author = ui->table->item(selectedRow, 0)->text();
+    QString title = ui->table->item(selectedRow, 1)->text();
+
+    bool borrowed = library.borrowBook(author.toStdString(), title.toStdString());
+
+    if (!borrowed) {
+        QMessageBox::warning(this, "Error", "The book could not be borrowed");
+    } else {
+        populateTable();
+    }
+}
+
+void MainWindow::returnBook() {}

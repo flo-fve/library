@@ -71,3 +71,9 @@ QHeaderView::section {
     border: none;
     font-weight: 500;
 }
+
+/* ── Vertical Line ────────────────────────────────────── */
+#verticalLine {
+    background-color: #2563eb;
+    border: 0;
+}
