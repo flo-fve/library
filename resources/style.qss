@@ -6,6 +6,12 @@ QMainWindow, QWidget {
     font-size: 13px;
 }
 
+/* ── QLabel (header) ──────────────────── */
+QLabel#header {
+    font-size: 17px;
+    font-weight: 10;
+}
+
 /* ── QLineEdit (search bar) ──────────────────── */
 QLineEdit {
     background-color: #0f3460;
