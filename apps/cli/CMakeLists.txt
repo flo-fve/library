@@ -1,4 +1,5 @@
 add_executable(library_cli
+    CliApp.cpp
     main.cpp
 )
 

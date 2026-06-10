@@ -4,25 +4,42 @@
 
 #include <algorithm>
 #include <iostream>
+#include <limits>
 #include <regex>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
 /******************************************************************************************
+ * Colors
+ ******************************************************************************************/
+
+namespace Color {
+const std::string RESET = "\033[0m";
+const std::string BOLD = "\033[1m";
+const std::string RED = "\033[31m";
+const std::string GREEN = "\033[32m";
+const std::string YELLOW = "\033[33m";
+const std::string CYAN = "\033[36m";
+}  // namespace Color
+
+/******************************************************************************************
  * Functions
  ******************************************************************************************/
 
-void displayMenu() {
-    std::cout << "\n+----------------------\n";
-    std::cout << "| 1. Display the books\n";
-    std::cout << "| 2. Search for a book\n";
-    std::cout << "| 3. Borrow a book\n";
-    std::cout << "| 4. Return a book\n";
-    std::cout << "| 5. Add a book\n";
-    std::cout << "| 6. Remove a book\n";
-    std::cout << "| 7. Exit\n";
-    std::cout << "+----------------------\n";
+int getUserInput() {
+    int choice;
+    std::cout << "Choice: ";
+
+    while (!(std::cin >> choice)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << Color::RED << "Invalid input. Please try again: " << Color::RESET;
+    }
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    return choice;
 }
 
 std::vector<std::string> splitString(const std::string& s, const std::string& delimiter) {

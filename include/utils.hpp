@@ -10,7 +10,7 @@
  * Definition of the functions
  ******************************************************************************************/
 
-void displayMenu();
+int getUserInput();
 
 std::vector<std::string> splitString(const std::string& s, const std::string& delimiter);
 
