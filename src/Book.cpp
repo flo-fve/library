@@ -24,7 +24,7 @@ Book::~Book() {}
 
 void Book::display() const {
     std::string disp = available ? "available" : "not available";
-    std::cout << title << ", " << author << " (" << year << "), " << disp << "\n";
+    std::cout << author << ", " << title << " (" << year << "), " << disp << "\n";
 }
 
 std::string Book::getAuthor() const {

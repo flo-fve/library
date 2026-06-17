@@ -77,6 +77,11 @@ std::string slugify(std::string input) {
         {"ü", "u"}, {"Ù", "u"}, {"Ú", "u"}, {"Û", "u"}, {"Ü", "u"}, {"ç", "c"}, {"Ç", "c"},
         {"ñ", "n"}, {"Ñ", "n"}};
 
+    static const std::regex invalidChars("[^a-z0-9\\s-]");
+    static const std::regex multipleSpaces("\\s+");
+    static const std::regex multipleDashes("-+");
+    static const std::regex edgeDashes("^-|-$");
+
     std::string result;
 
     for (size_t i = 0; i < input.size();) {
@@ -105,13 +110,17 @@ std::string slugify(std::string input) {
 
     std::transform(input.begin(), input.end(), input.begin(), ::tolower);
 
-    input = std::regex_replace(input, std::regex("[^a-z0-9\\s-]"), "");
+    input = std::regex_replace(input, invalidChars, "");
 
-    input = std::regex_replace(input, std::regex("\\s+"), "-");
+    input = std::regex_replace(input, multipleSpaces, "-");
 
-    input = std::regex_replace(input, std::regex("-+"), "-");
+    input = std::regex_replace(input, multipleDashes, "-");
 
-    input = std::regex_replace(input, std::regex("^-|-$"), "");
+    input = std::regex_replace(input, edgeDashes, "");
 
     return input;
+}
+
+bool equalsIgnoreCase(const std::string& a, const std::string& b) {
+    return slugify(a) == slugify(b);
 }

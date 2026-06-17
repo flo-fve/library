@@ -20,4 +20,6 @@ std::vector<std::string> splitString(const std::string& s, const std::string& de
 
 std::string slugify(std::string input);
 
+bool equalsIgnoreCase(const std::string& a, const std::string& b);
+
 #endif  // INCLUDE_UTILS_HPP_

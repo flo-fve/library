@@ -9,7 +9,7 @@
 
 #include "Book.hpp"
 
-typedef std::map<std::string, std::vector<Book>> Collection;
+typedef std::vector<Book> Collection;
 
 /******************************************************************************************
  * Definition of the class
@@ -27,12 +27,12 @@ class Library {
         int numberAuthors() const;
         int numberBooks() const;
 
-        void addBook(std::string const& author, Book book);
-        void removeBook(std::string const& author, std::string const& title);
-        std::vector<const Book*> searchByTitle(std::string title) const;
-        const std::vector<Book>* searchByAuthor(std::string const& author) const;
-        bool borrowBook(std::string author, std::string const& title);
-        bool returnBook(std::string author, std::string const& title);
+        void addBook(Book book);
+        bool removeBook(std::string const& author, std::string const& title);
+        bool borrowBook(std::string const& author, std::string const& title);
+        bool returnBook(std::string const& author, std::string const& title);
+        std::vector<Book> searchByTitle(std::string const& title) const;
+        std::vector<Book> searchByAuthor(std::string const& author) const;
 
     private:
         Collection collection;

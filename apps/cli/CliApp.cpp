@@ -115,33 +115,33 @@ void CliApp::execute() {
                     std::cout << "Title: ";
                     std::getline(std::cin, titleSearched);
 
-                    std::vector<const Book*> resultats = library.searchByTitle(titleSearched);
+                    const std::vector<Book> results = library.searchByTitle(titleSearched);
 
-                    if (!resultats.empty()) {
-                        for (const auto& book : resultats) {
+                    if (!results.empty()) {
+                        for (const auto& book : results) {
                             std::cout << "+ ";
-                            book->display();
+                            book.display();
                         }
                     } else {
                         std::cout << "+ Title not found\n";
                     }
                     waitForInput();
+
                 } else if (choice == 2) {
                     std::string authorSearched;
 
                     std::cout << "Author: ";
                     std::getline(std::cin, authorSearched);
 
-                    try {
-                        const std::vector<Book>* authorBiblio =
-                            library.searchByAuthor(authorSearched);
+                    const std::vector<Book> authorBiblio = library.searchByAuthor(authorSearched);
 
-                        for (const auto& book : *authorBiblio) {
+                    if (!authorBiblio.empty()) {
+                        for (const auto& book : authorBiblio) {
                             std::cout << "+ ";
                             book.display();
                         }
-                    } catch (std::string const& error) {
-                        std::cerr << "  " << error << "\n";
+                    } else {
+                        std::cout << "+ Author not found or has no book\n";
                     }
                     waitForInput();
                 } else if (choice == 0) {
@@ -210,7 +210,9 @@ void CliApp::execute() {
 
                 book = Book(title, author, year);
 
-                library.addBook(author, book);
+                library.addBook(book);
+
+                std::cout << "Book added\n";
 
                 currentState = MenuState::BooksManagement;
                 break;
@@ -226,7 +228,13 @@ void CliApp::execute() {
                 std::cout << "Author: ";
                 std::getline(std::cin, author);
 
-                library.removeBook(author, title);
+                bool removed = library.removeBook(author, title);
+
+                if (removed) {
+                    std::cout << "Book removed successfuly\n";
+                } else {
+                    std::cout << "Book not found\n";
+                }
 
                 currentState = MenuState::BooksManagement;
                 break;

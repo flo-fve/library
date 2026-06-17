@@ -7,6 +7,7 @@
 #include <iostream>
 #include <numeric>
 #include <ranges>
+#include <set>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -28,7 +29,7 @@ Library::Library(std::string const& data) {
     if (flux) {
         std::string line;
 
-        std::string titre = "";
+        std::string title = "";
         std::string author = "";
         int year = 0;
         bool available = true;
@@ -38,14 +39,14 @@ Library::Library(std::string const& data) {
             try {
                 std::vector<std::string> res = splitString(line, ";");
 
-                titre = res[0];
-                author = res[1];
+                author = res[0];
+                title = res[1];
                 year = std::stoi(res[2]);
                 available = res[3] == "1";
 
-                book = Book(titre, author, year, available);
+                book = Book(title, author, year, available);
 
-                collection[author].push_back(book);
+                collection.push_back(book);
 
             } catch (std::exception const& e) {
                 std::cerr << "The library could not be loaded (error reading): " << e.what()
@@ -63,13 +64,13 @@ Library::~Library() {
     std::ofstream flux(save.c_str());
 
     if (flux) {
-        for (auto const& it : collection) {
-            auto const& books = it.second;
+        std::stable_sort(collection.begin(), collection.end(), [](const Book& b1, const Book& b2) {
+            return b1.getAuthor() < b2.getAuthor();
+        });
 
-            for (auto const& book : books) {
-                flux << book.getTitle() << ";" << book.getAuthor() << ";" << book.getYear() << ";"
-                     << book.getAvailability() << "\n";
-            }
+        for (auto const& book : collection) {
+            flux << book.getAuthor() << ";" << book.getTitle() << ";" << book.getYear() << ";"
+                 << book.getAvailability() << "\n";
         }
     } else {
         std::cerr << "The library could not be saved (error file)\n";
@@ -85,117 +86,92 @@ void Library::display() const {
         std::cout << "There are no book in the library\n";
 
     } else {
-        for (const auto& it : collection) {
-            const auto& author = it.first;
-            const auto& books = it.second;
-
-            std::cout << "+ " << author << " :\n";
-            for (const auto& element : books) {
-                std::cout << "| " << element;
-            }
+        for (const auto& book : collection) {
+            std::cout << "| ";
+            book.display();
         }
     }
 }
 
 int Library::numberAuthors() const {
-    return collection.size();
+    std::set<std::string> uniqueAuthors;
+
+    for (const auto& book : collection) {
+        uniqueAuthors.insert(book.getAuthor());
+    }
+
+    return uniqueAuthors.size();
 }
 
 int Library::numberBooks() const {
-    size_t total =
-        std::transform_reduce(collection.begin(), collection.end(), size_t{0}, std::plus<>(),
-                              [](const auto& pair) { return pair.second.size(); });
-
-    return total;
+    return collection.size();
 }
 
 std::vector<Book> Library::getBooks() {
-    std::vector<Book> books;
-
-    for (const auto& it : collection) {
-        books.insert(books.end(), it.second.begin(), it.second.end());
-    }
-
-    return books;
+    return collection;
 }
 
-void Library::addBook(std::string const& author, Book book) {
-    collection[author].push_back(book);
+void Library::addBook(Book book) {
+    collection.push_back(book);
 }
 
-void Library::removeBook(std::string const& author, std::string const& title) {
-    auto it = collection.find(author);
-    if (it == collection.end()) {
-        return;
-    }
+bool Library::removeBook(std::string const& author, std::string const& title) {
+    auto it =
+        std::remove_if(collection.begin(), collection.end(), [&title, &author](const Book& b) {
+            return b.getTitle() == title && b.getAuthor() == author;
+        });
 
-    auto& books = it->second;
-    books.erase(std::remove_if(books.begin(), books.end(),
-                               [&title](const Book& b) { return b.getTitle() == title; }),
-                books.end());
+    bool found = (it != collection.end());
 
-    if (books.empty()) {
-        collection.erase(it);
-    }
+    collection.erase(it, collection.end());
+
+    return found;
 }
 
-std::vector<const Book*> Library::searchByTitle(std::string title) const {
-    std::vector<const Book*> resultats;
-
-    title = slugify(title);
-
-    for (const auto& it : collection) {
-        const auto& author = it.first;
-        const auto& books = it.second;
-
-        for (const auto& book : books) {
-            std::string titleBook = book.getTitle();
-
-            titleBook = slugify(titleBook);
-
-            if (titleBook == title) {
-                resultats.push_back(&book);
-            }
-        }
-    }
-
-    return resultats;
-}
-
-const std::vector<Book>* Library::searchByAuthor(std::string const& author) const {
-    auto it = collection.find(author);
+bool Library::borrowBook(std::string const& author, std::string const& title) {
+    auto it = std::find_if(collection.begin(), collection.end(), [&title, &author](const Book& b) {
+        return equalsIgnoreCase(b.getTitle(), title) && equalsIgnoreCase(b.getAuthor(), author);
+    });
 
     if (it == collection.end()) {
-        throw std::string("Author not found");
+        return false;
     }
 
-    return &it->second;
+    Book book = *it;
+    book.setAvailability(false);
+
+    return true;
 }
 
-bool Library::borrowBook(std::string author, std::string const& titre) {
-    if (!collection[author].empty()) {
-        auto& books = collection[author];
+bool Library::returnBook(std::string const& author, std::string const& title) {
+    auto it = std::find_if(collection.begin(), collection.end(), [&title, &author](const Book& b) {
+        return equalsIgnoreCase(b.getTitle(), title) && equalsIgnoreCase(b.getAuthor(), author);
+    });
 
-        auto it = std::ranges::find_if(
-            books, [&](const Book& l) { return l.getTitle() == titre && l.getAvailability(); });
-
-        if (it != books.end()) {
-            it->setAvailability(false);
-            return true;
-        }
+    if (it == collection.end()) {
+        return false;
     }
 
-    return false;
+    Book book = *it;
+    book.setAvailability(true);
+
+    return true;
 }
 
-bool Library::returnBook(std::string author, std::string const& titre) {
-    auto book = std::find_if(collection[author].begin(), collection[author].end(),
-                             [&](const Book& obj) { return obj.getTitle() == titre; });
+std::vector<Book> Library::searchByTitle(std::string const& title) const {
+    std::vector<Book> result;
 
-    if (book != collection[author].end()) {
-        book->setAvailability(true);
-        return true;
-    }
+    std::copy_if(collection.begin(), collection.end(), std::back_inserter(result),
+                 [&title](const Book& b) { return equalsIgnoreCase(b.getTitle(), title); });
 
-    return false;
+    return result;
+}
+
+std::vector<Book> Library::searchByAuthor(std::string const& author) const {
+    std::vector<Book> result;
+
+    std::copy_if(collection.begin(), collection.end(), std::back_inserter(result),
+                 [&author](const Book& b) { return equalsIgnoreCase(b.getAuthor(), author); });
+
+    return result;
 }

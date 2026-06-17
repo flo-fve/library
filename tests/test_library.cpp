@@ -11,14 +11,14 @@ TEST(LibraryTest, AddBookTest) {
 
     // Add a new book and a new author entry
     Book book("Title", "Author", 2026);
-    library.addBook("Author", book);
+    library.addBook(book);
 
     EXPECT_EQ(library.numberAuthors(), 1);
     EXPECT_EQ(library.numberBooks(), 1);
 
     // Add a new book with the same author
     Book bookBis("Another title", "Author", 2023);
-    library.addBook("Author", bookBis);
+    library.addBook(bookBis);
 
     EXPECT_EQ(library.numberAuthors(), 1);
     EXPECT_EQ(library.numberBooks(), 2);
@@ -29,7 +29,7 @@ TEST(LibraryTest, RemoveBookTest) {
 
     // Add a new book and a new author entry
     Book book("Title", "Author", 2026);
-    library.addBook("Author", book);
+    library.addBook(book);
 
     EXPECT_EQ(library.numberAuthors(), 1);
     EXPECT_EQ(library.numberBooks(), 1);

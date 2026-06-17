@@ -96,7 +96,7 @@ void MainWindow::addBook() {
 
         if (!title.empty() && !author.empty()) {
             Book book(title, author, year);
-            library.addBook(author, book);
+            library.addBook(book);
 
             populateTable();
         }

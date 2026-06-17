@@ -1,24 +1,24 @@
-L'Étranger;Albert Camus;1942;1
-La Peste;Albert Camus;1947;1
-Le Meilleur des mondes;Aldous Huxley;1932;1
-Le Comte de Monte-Cristo;Alexandre Dumas;1844;1
-Le Petit Prince;Antoine de Saint-Exupéry;1943;1
-Les Fleurs du Mal;Baudelaire;1857;1
-Dracula;Bram Stoker;1897;1
-Crime et Châtiment;Fiodor Dostoïevski;1866;0
-Salut c'est cool;Flo Favre;2026;0
-Dune;Frank Herbert;1965;1
-La Métamorphose;Franz Kafka;1915;1
-1984;George Orwell;1949;0
-Moby Dick;Herman Melville;1851;1
-Fondation;Isaac Asimov;1951;0
-Harry Potter à l'école des sorciers;J.K. Rowling;1997;0
-Le Seigneur des Anneaux;J.R.R. Tolkien;1954;1
-Orgueil et Préjugés;Jane Austen;1813;1
-La Maison Vide;Laurent Mauvignier;2025;0
-Fahrenheit 451;Ray Bradbury;1953;0
-Chroniques martiennes;Ray Bradbury;1950;1
-Le Nom de la rose;Umberto Eco;1980;0
-Les Misérables;Victor Hugo;1862;1
-Les Contemplations;Victor Hugo;2856;1
-Germinal;Émile Zola;1885;1
+Albert Camus;L'Étranger;1942;1
+Albert Camus;La Peste;1947;1
+Aldous Huxley;Le Meilleur des mondes;1932;1
+Alexandre Dumas;Le Comte de Monte-Cristo;1844;1
+Antoine de Saint-Exupéry;Le Petit Prince;1943;1
+Baudelaire;Les Fleurs du Mal;1857;1
+Bram Stoker;Dracula;1897;1
+Fiodor Dostoïevski;Crime et Châtiment;1866;0
+Flo Favre;Salut c'est cool;2026;0
+Frank Herbert;Dune;1965;1
+Franz Kafka;La Métamorphose;1915;1
+George Orwell;1984;1949;0
+Herman Melville;Moby Dick;1851;1
+Isaac Asimov;Fondation;1951;0
+J.K. Rowling;Harry Potter à l'école des sorciers;1997;0
+J.R.R. Tolkien;Le Seigneur des Anneaux;1954;1
+Jane Austen;Orgueil et Préjugés;1813;1
+Laurent Mauvignier;La Maison Vide;2025;0
+Ray Bradbury;Fahrenheit 451;1953;0
+Ray Bradbury;Chroniques martiennes;1950;1
+Umberto Eco;Le Nom de la rose;1980;0
+Victor Hugo;Les Misérables;1862;1
+Victor Hugo;Les Contemplations;2856;1
+Émile Zola;Germinal;1885;1
