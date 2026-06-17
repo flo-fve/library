@@ -12,6 +12,10 @@
 
 int getUserInput();
 
+void clearScreen();
+
+void waitForInput();
+
 std::vector<std::string> splitString(const std::string& s, const std::string& delimiter);
 
 std::string slugify(std::string input);

@@ -18,6 +18,7 @@ CliApp::~CliApp() {}
  ******************************************************************************************/
 
 int CliApp::displayMenuMain() {
+    clearScreen();
     std::cout << "\n================================\n"
               << "MAIN\n"
               << "================================\n"
@@ -32,6 +33,7 @@ int CliApp::displayMenuMain() {
 }
 
 int CliApp::displaySubMenuBooks() {
+    clearScreen();
     std::cout << "\n================================\n"
               << "MAIN > BOOKS MANAGEMENT\n"
               << "================================\n"
@@ -41,7 +43,7 @@ int CliApp::displaySubMenuBooks() {
               << "[4] Return a book\n"
               << "[5] Add a book\n"
               << "[6] Remove a book\n"
-              << " -------------------------------\n"
+              << "--------------------------------\n"
               << "[0] Back\n"
               << "================================\n";
 
@@ -50,12 +52,13 @@ int CliApp::displaySubMenuBooks() {
 }
 
 int CliApp::displaySubSubMenuSearch() {
+    clearScreen();
     std::cout << "\n================================\n"
               << "MAIN > BOOKS MANAGEMENT > SEARCH\n"
               << "================================\n"
               << "[1] Search by title\n"
               << "[2] Search by author\n"
-              << " -------------------------------\n"
+              << "--------------------------------\n"
               << "[0] Back\n"
               << "================================\n";
 
@@ -84,6 +87,7 @@ void CliApp::execute() {
 
                 if (choice == 1) {
                     library.display();
+                    waitForInput();
                 } else if (choice == 2) {
                     currentState = MenuState::BookSearch;
                 } else if (choice == 3) {
@@ -121,6 +125,7 @@ void CliApp::execute() {
                     } else {
                         std::cout << "+ Title not found\n";
                     }
+                    waitForInput();
                 } else if (choice == 2) {
                     std::string authorSearched;
 
@@ -138,6 +143,7 @@ void CliApp::execute() {
                     } catch (std::string const& error) {
                         std::cerr << "  " << error << "\n";
                     }
+                    waitForInput();
                 } else if (choice == 0) {
                     currentState = MenuState::BooksManagement;
                 }
@@ -161,6 +167,7 @@ void CliApp::execute() {
                 } else {
                     std::cout << "+ Book not found\n";
                 }
+                waitForInput();
                 break;
             }
 
@@ -181,6 +188,7 @@ void CliApp::execute() {
                 } else {
                     std::cout << "+ Book not found\n";
                 }
+                waitForInput();
                 break;
             }
 

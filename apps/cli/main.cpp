@@ -1,8 +1,5 @@
 // Copyright 2026 Florian Favre
 
-#include <iostream>
-#include <vector>
-
 #include "CliApp.hpp"
 #include "Library.hpp"
 

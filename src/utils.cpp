@@ -42,6 +42,15 @@ int getUserInput() {
     return choice;
 }
 
+void clearScreen() {
+    std::cout << "\033[2J\033[H";
+}
+
+void waitForInput() {
+    std::cout << "\nPress Enter to continue...";
+    std::cin.get();
+}
+
 std::vector<std::string> splitString(const std::string& s, const std::string& delimiter) {
     size_t pos_start = 0;
     size_t pos_end;
