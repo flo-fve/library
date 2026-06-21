@@ -133,12 +133,11 @@ bool Library::borrowBook(std::string const& author, std::string const& title) {
         return equalsIgnoreCase(b.getTitle(), title) && equalsIgnoreCase(b.getAuthor(), author);
     });
 
-    if (it == collection.end()) {
-        return false;
+    if (it == collection.end() || !it->getAvailability()) {
+        return false;  // book not found or already borrowed
     }
 
-    Book book = *it;
-    book.setAvailability(false);
+    it->setAvailability(false);
 
     return true;
 }
@@ -148,12 +147,11 @@ bool Library::returnBook(std::string const& author, std::string const& title) {
         return equalsIgnoreCase(b.getTitle(), title) && equalsIgnoreCase(b.getAuthor(), author);
     });
 
-    if (it == collection.end()) {
-        return false;
+    if (it == collection.end() || it->getAvailability()) {
+        return false;  // book not found or already available
     }
 
-    Book book = *it;
-    book.setAvailability(true);
+    it->setAvailability(true);
 
     return true;
 }
